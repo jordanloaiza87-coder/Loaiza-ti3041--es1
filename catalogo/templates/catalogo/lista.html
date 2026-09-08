@@ -1,0 +1,42 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Catálogo de Productos - Ferretería{% endblock %}
+
+{% block contenido %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="p-4 bg-white rounded shadow-sm border">
+            <h1 class="h3 text-primary">Catálogo de Productos</h1>
+            <p class="text-muted">Encuentra todas nuestras herramientas y materiales disponibles.</p>
+            <!-- Resumen calculado exigido en Etapa 3 -->
+            <div class="alert alert-info mb-0">
+                <strong>Resumen del inventario:</strong> Total de productos registrados: <strong>{{ total_productos }}</strong> | Disponibles con stock: <strong>{{ con_stock }}</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for p in productos %}
+    <div class="col">
+        <!-- Destacado condicional: si el stock es 0, cambia el borde a rojo -->
+        <div class="card h-100 shadow-sm {% if p.stock == 0 %}border-danger{% else %}border-success{% endif %}">
+            <div class="card-body">
+                <span class="badge bg-secondary mb-2">{{ p.categoría }}</span>
+                <h5 class="card-title">{{ p.nombre }}</h5>
+                <p class="card-text text-success fw-bold fs-5">${{ p.precio }}</p>
+                
+                {% if p.stock > 0 %}
+                    <p class="text-muted small">Stock disponible: {{ p.stock }} unidades</p>
+                {% else %}
+                    <p class="text-danger fw-bold small">¡Sin Stock / No disponible!</p>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-white border-top-0">
+                <a href="{% url 'detalle_producto' p.id %}" class="btn btn-outline-primary btn-sm w-100">Ver Detalle</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

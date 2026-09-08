@@ -1,0 +1,31 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Detalle del Producto - Ferretería{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm p-4 border">
+            {% if producto %}
+                <span class="badge bg-secondary mb-2 align-self-start">{{ producto.categoría }}</span>
+                <h2 class="text-primary mb-3">{{ producto.nombre }}</h2>
+                <hr>
+                <p class="fs-4 text-success fw-bold">Precio: ${{ producto.precio }}</p>
+                
+                {% if producto.stock > 0 %}
+                    <p class="text-muted">Stock disponible: <strong>{{ producto.stock }} unidades</strong></p>
+                {% else %}
+                    <p class="text-danger fw-bold">¡Producto sin stock / no disponible actualmente!</p>
+                {% endif %}
+
+                <div class="mt-4">
+                    <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Volver al catálogo</a>
+                </div>
+            {% else %}
+                <div class="alert alert-danger">El producto solicitado no existe en el sistema.</div>
+                <a href="{% url 'lista_productos' %}" class="btn btn-primary">Volver al inicio</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
