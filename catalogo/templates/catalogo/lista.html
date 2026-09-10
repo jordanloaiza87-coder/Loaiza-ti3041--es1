@@ -21,6 +21,11 @@
     <div class="col">
         <!-- Destacado condicional: si el stock es 0, cambia el borde a rojo -->
         <div class="card h-100 shadow-sm {% if p.stock == 0 %}border-danger{% else %}border-success{% endif %}">
+            {% if p.imagen %}
+                <img src="{{ p.imagen }}" class="card-img-top" alt="{{ p.nombre }}" style="height: 180px; object-fit: cover;">
+            {% else %}
+                <img src="https://via.placeholder.com/300x180?text=Sin+Imagen" class="card-img-top" alt="Sin imagen" style="height: 180px; object-fit: cover;">
+            {% endif %}
             <div class="card-body">
                 <span class="badge bg-secondary mb-2">{{ p.categoría }}</span>
                 <h5 class="card-title">{{ p.nombre }}</h5>

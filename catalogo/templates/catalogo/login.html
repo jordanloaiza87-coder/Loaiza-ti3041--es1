@@ -1,0 +1,23 @@
+{% extends 'catalogo/base.html' %}
+
+{% block titulo %}Iniciar Sesión - Ferretería{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card shadow-sm p-4 border">
+            <h2 class="text-center text-primary mb-4">Iniciar Sesión</h2>
+            
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100 mt-3">Entrar al Sistema</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <a href="{% url 'lista_productos' %}" class="text-decoration-none">Volver al catálogo</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

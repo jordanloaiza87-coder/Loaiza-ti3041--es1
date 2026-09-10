@@ -1,0 +1,39 @@
+{% extends 'catalogo/base.html' %}
+{% block titulo %}Formulario Producto{% endblock %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+            <h3 class="text-primary mb-3">{% if producto %}Editar Producto{% else %}Nuevo Producto{% endif %}</h3>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" name="nombre" class="form-control" value="{% if producto %}{{ producto.nombre }}{% endif %}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Categoría:</label>
+                    <input type="text" name="categoria" class="form-control" value="{% if producto %}{{ producto.categoria }}{% endif %}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Precio:</label>
+                    <input type="number" name="precio" class="form-control" value="{% if producto %}{{ producto.precio }}{% endif %}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Stock:</label>
+                    <input type="number" name="stock" class="form-control" value="{% if producto %}{{ producto.stock }}{% endif %}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">URL de la Imagen:</label>
+                    <input type="url" name="imagen" class="form-control" value="{% if producto %}{{ producto.imagen }}{% endif %}" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                <button type="submit" class="btn btn-success w-100">Guardar Cambios</button>
+            </form>
+            <div class="mt-3 text-center">
+                <a href="{% url 'gestionar_productos' %}" class="text-decoration-none">Cancelar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
