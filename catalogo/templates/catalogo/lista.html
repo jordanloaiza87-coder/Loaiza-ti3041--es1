@@ -38,6 +38,9 @@
                 {% endif %}
             </div>
             <div class="card-footer bg-white border-top-0">
+                {% if p.stock > 0 %}
+                    <a href="{% url 'agregar_al_carrito' p.id %}" class="btn btn-success btn-sm w-100 mb-2">🛒 Agregar al Carrito</a>
+                {% endif %}
                 <a href="{% url 'detalle_producto' p.id %}" class="btn btn-outline-primary btn-sm w-100">Ver Detalle</a>
             </div>
         </div>

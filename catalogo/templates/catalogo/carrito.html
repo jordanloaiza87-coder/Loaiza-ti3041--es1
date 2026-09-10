@@ -1,0 +1,42 @@
+{% extends 'catalogo/base.html' %}
+{% block titulo %}Carrito de Compras{% endblock %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2 class="mb-4">Tu Carrito de Compras</h2>
+        {% if items %}
+            <table class="table table-bordered bg-white shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.producto.nombre }}</td>
+                        <td>${{ item.producto.precio }}</td>
+                        <td>{{ item.cantidad }}</td>
+                        <td>${{ item.subtotal }}</td>
+                        <td>
+                            <a href="{% url 'eliminar_del_carrito' item.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-end mb-4">
+                <h3>Total a Pagar: <span class="text-success">${{ total_carrito }}</span></h3>
+                <a href="{% url 'procesar_compra' %}" class="btn btn-primary btn-lg mt-2">💳 Finalizar Compra y Descontar Stock</a>
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center">Tu carrito está vacío.</div>
+        {% endif %}
+        <a href="{% url 'lista_productos' %}" class="btn btn-secondary">Seguir Comprando</a>
+    </div>
+</div>
+{% endblock %}
